@@ -6,19 +6,16 @@ from django.views import View
 from django.views.generic import ListView
 
 
-class CarsView(View):
-
-    def get(self, request):
-        search = request.GET.get('search')   
-        cars = Cars.objects.all().order_by('model')
-
+class CarsView(ListView):
+    model = Cars
+    template_name = 'cars.html'
+    context_object_name = 'cars'
+    def get_queryset(self):
+        cars_query = super().get_queryset().order_by('model')
+        search = self.request.GET.get('search')
         if search:
-            cars = cars.filter(Q(model__icontains=search) | Q(brand__name__icontains=search))#Uso de Q objects: Isso permite combinar múltiplas condições de filtragem em uma única consulta, melhorando a legibilidade e a eficiência.
-        return render(
-            request,
-                    'cars.html',
-                    {'cars': cars})
-
+            cars_query = cars_query.filter(model__icontains=search)
+        return cars_query
 
 
 class NewCarView(View):
