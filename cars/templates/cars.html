@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Carros</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <style>
+
+            @media (min-width: 768px) {
+                .car-card {
+                    max-width: 720px;
+                }
+            }
+            .car-card {
+                margin-bottom: 20px;
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+                border-radius: 10px;
+                background-color: #e1e1e1;
+                overflow: hidden;
+                text-algin: center;
+                transition: all 0.3s ease;
+
+            }
+
+            .car-card:hover {
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+                transform: translateY(-2px)
+            }
+            .car-image {
+                height: 200px;
+                object-fit: cover;
+            }
+        button[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: baxkground-color 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: 70%;
+        }
+        form {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            algin-items: center;
+            text-align: center;
+            padding : 20px;
+        }
+        </style>
+        <form method="GET" action="{% url 'cars_list' %}">
+            <input type="text" name="search" placeholder="Pesquisar">
+            <button type="submit">Pesquisar</button>
+        </form>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <h1 class="text-center mb-5">Lista de Carros</h1>
+            <div class="row">
+            {% if cars %}
+                {% for car in cars %}
+                <div class="col-md-4">
+                    <div class="card car-card">
+                        <img src="{{ car.picture.url }}" class="card-img-top car-image" alt="{{ car.name }}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ car.brand.name }} - {{ car.model }}</h5>
+                            <p class="card-text"><strong>Modelo:</strong> {{ car.model }}</p>
+                            <p class="card-text"><strong>Ano:</strong> {{ car.year }}</p>
+                            <p class="card-text"><strong>Cor:</strong> {{ car.color }}</p>
+                            <p class="card-text">{{ car.description }}</p>
+                            <p class="card-text"><strong>Preço:</strong> R$ {{ car.price }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+            <p class = "text-center"> Nenhum carro encontrado </p>
+            {% endif %}	
+            </div>
+        </div>
+    </body>
+    </html>
+{% endblock %}
