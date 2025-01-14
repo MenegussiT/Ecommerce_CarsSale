@@ -3,7 +3,7 @@ from django.db.models import Q
 from cars.models import Cars
 from cars.forms import CarModelForm
 from django.views import View
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 
 
 class CarsView(ListView):
@@ -23,3 +23,8 @@ class NewCarView(CreateView):
     form_class = CarModelForm
     template_name = 'new_car.html'
     success_url = '/cars'
+
+class CarDatailView(DetailView):
+    model = Cars
+    template_name = 'car_detail.html'
+    
