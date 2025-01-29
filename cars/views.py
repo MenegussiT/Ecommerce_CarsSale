@@ -27,4 +27,9 @@ class NewCarView(CreateView):
 class CarDatailView(DetailView):
     model = Cars
     template_name = 'car_detail.html'
+    context_object_name = 'car'
     
+    def get(self, request, *args, **kwargs):
+        car = self.get_object()
+        print(f"DEBUG: {car}")  # Isso vai aparecer no terminal
+        return super().get(request, *args, **kwargs)

@@ -28,6 +28,6 @@ urlpatterns = [
     path('cars/', CarsView.as_view(), name='cars_list'),
     path('logout/', logout_view, name='logout'),
     path('new_car/', NewCarView.as_view(), name='new_car'),
-    path('cars/<int:pk>', CarDatailView.as_view(), name='car_datail' )
+    path('cars/<int:pk>', CarDatailView.as_view(), name='car_detail')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
     
