@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.db.models import Q
 from cars.models import Cars
 from cars.forms import CarModelForm
+from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
 
 class CarsView(ListView):
@@ -27,9 +28,16 @@ class NewCarView(CreateView):
 class CarDatailView(DetailView):
     model = Cars
     template_name = 'car_detail.html'
-    context_object_name = 'car'
     
-    def get(self, request, *args, **kwargs):
-        car = self.get_object()
-        print(f"DEBUG: {car}")  # Isso vai aparecer no terminal
-        return super().get(request, *args, **kwargs)
+
+class CarUpdateView(UpdateView):
+    model = Cars
+    form_class = CarModelForm
+    template_name = 'car_update.html'
+    def get_success_url(self):
+        return reverse_lazy('car_detail', kwargs={'pk':self.object.ok})
+
+class CarDeleteView(DeleteView):
+    model = Cars
+    template_name = 'car_delete.html'
+    success_url = '/cars/'
