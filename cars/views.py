@@ -3,7 +3,8 @@ from django.db.models import Q
 from cars.models import Cars
 from cars.forms import CarModelForm
 from django.urls import reverse_lazy
-from
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views import View
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 
@@ -19,7 +20,7 @@ class CarsView(ListView):
             cars_query = cars_query.filter(model__icontains=search)
         return cars_query
 
-
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class NewCarView(CreateView):
     model = Cars
     form_class = CarModelForm
@@ -31,6 +32,7 @@ class CarDatailView(DetailView):
     template_name = 'car_detail.html'
     
 
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarUpdateView(UpdateView):
     model = Cars
     form_class = CarModelForm
@@ -38,6 +40,7 @@ class CarUpdateView(UpdateView):
     def get_success_url(self):
         return reverse_lazy('car_detail', kwargs={'pk':self.object.ok})
 
+@method_decorator(login_required(login_url='login'), name='dispatch')
 class CarDeleteView(DeleteView):
     model = Cars
     template_name = 'car_delete.html'
