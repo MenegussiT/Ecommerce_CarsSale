@@ -19,6 +19,7 @@ class Cars(models.Model):
     color = models.CharField(max_length=50)
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, related_name='car_brand')
     picture = models.ImageField(upload_to='cars/cars_photo', blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.model
