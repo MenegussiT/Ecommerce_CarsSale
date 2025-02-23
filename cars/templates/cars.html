@@ -114,7 +114,11 @@
       
         <a href="{% url 'car_detail' car.pk %}">
           <div class="car-card">
+            {%if car.picture%}
             <img src="{{ car.picture.url }}" alt="{{ car.model }} - {{ car.brand }}">
+            {%else%}
+            <img src="cars\cars_photo\default.jpg" alt="{{ car.model }} - {{ car.brand }}">
+            {%endif%}
             <h2>{{ car.brand }} {{ car.model }}</h2>
             <p>{{ car.year }} - R$ {{ car.price }}</p>
             
