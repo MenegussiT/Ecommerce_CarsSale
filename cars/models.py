@@ -28,7 +28,7 @@ class Cars(models.Model):
 
 class CarInventory(models.Model):
     cars_count = models.IntegerField()
-    cars_value = models.FloatField()
+    cars_value = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:#Ordenar por data de criação de forma decrescente

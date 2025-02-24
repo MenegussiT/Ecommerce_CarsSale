@@ -6,11 +6,13 @@ from gemini_api.client import get_car_ai_bio
 
 def car_inventory_update():
     cars_count = Cars.objects.count()
-    cars_value = Cars.objects.aggregate(total_value=Sum('price'))['total_value']
+    cars_value = Cars.objects.aggregate(total_value=Sum('price'))['total_value'] or 0.00
     CarInventory.objects.create(
         cars_count=cars_count, 
         cars_value=cars_value
     )
+
+    
 
 
 @receiver(post_save, sender=Cars)
