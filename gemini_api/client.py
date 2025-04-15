@@ -1,6 +1,12 @@
-import google.generativeai as genai 
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv
 
-genai.configure(api_key="AIzaSyDMEOFR_wzbkKAg3_f_gHEx66Pi5pCoeII")
+load_dotenv()
+
+API_KEY = os.getenv("GEMINI_API_KEY")
+
+genai.configure(api_key=API_KEY)
 
 def get_car_ai_bio(model, brand, year):
     model_gen = genai.GenerativeModel("gemini-2.0-flash")
