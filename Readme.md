@@ -129,4 +129,4 @@ Este projeto está licenciado sob a Licença MIT.
 
 Para qualquer dúvida ou colaboração, sinta-se à vontade para entrar em contato com:
 
-* **MenegussiT** - [Seu E-mail Aqui] - [Seu Perfil do LinkedIn/GitHub]
+* **MenegussiT** - fmenegussidev@gmail.com - https://www.linkedin.com/in/menegussi-felipe/
